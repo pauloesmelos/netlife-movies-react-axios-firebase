@@ -36,8 +36,11 @@ const Hero = () => {
                 {randomMovie?.title}
             </h2>
             <div className="flex items-center gap-5 my-5">
-              <button className="px-4 py-2 sm:px-6 sm:py-3 bg-white text-black font-semibold border
-              hover:text-white hover:bg-black duration-300">
+              <button 
+                className="px-4 py-2 sm:px-6 sm:py-3 bg-white text-black font-semibold border
+                hover:text-white hover:bg-black duration-300"
+                onClick={() => console.log(randomMovie)}
+              >
                 Play
               </button>
               <button className="px-7 py-2 sm:px-8 sm:py-3 border text-white font-semibold
