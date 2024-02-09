@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+  
+.no-scroll {
+    /* ie, edge e firefox*/
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.no-scroll::-webkit-scrollbar {
+    /* chrome*/
+    display: none;
+}
+@layer base {
+    html {
+        @apply bg-black
+    }
+    h1 {
+        @apply text-4xl sm:text-5xl text-red-600 font-bold cursor-pointer
+    }
+    .li {
+        @apply text-white px-2 text-xl font-bold cursor-pointer hover:text-red-500
+    }
+}
