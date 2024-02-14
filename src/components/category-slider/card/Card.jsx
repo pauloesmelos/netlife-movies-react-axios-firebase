@@ -1,16 +1,22 @@
 import React from 'react';
 import { FaRegHeart } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+
 const Card = ({ movie }) => {
   const pathIcon = import.meta.env.VITE_APP_API_PATH_ICON;
+
   const limitText = (text, limit) => {
     const newText = text?.split(" ").slice(0, limit).join(" ");
     return text?.split(" ").length > 4 ? newText.concat("...") : newText;
   }
   if(!movie?.backdrop_path) return null;
-
+  
   return (
-    <div className="w-full inline-block max-w-[230px] sm:max-w-[280px] lg:max-w-[350px] mr-3 
-    relative cursor-pointer border border-gray-900">
+    <NavLink 
+      className="w-full inline-block max-w-[230px] sm:max-w-[280px] lg:max-w-[350px] mr-3 
+      relative cursor-pointer border border-gray-900"
+      to={`/movies/${movie?.id}`}
+    >
       <div className="w-full h-full">
         {/* image */}
         <div>
@@ -36,7 +42,7 @@ const Card = ({ movie }) => {
           </div>
         </div>
       </div>
-    </div>
+    </NavLink>
   )
 }
 
