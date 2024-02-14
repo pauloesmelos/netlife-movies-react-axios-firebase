@@ -2,11 +2,9 @@ import axios from "axios";
 import { useQuery } from 'react-query';
 
 const getMovies = async (url) => {
-    if(url) {
-      return await axios.get(`${url}`)
-      .then(response => response.data)
-      .catch(erro => console.log(erro));
-    }
+    return await axios.get(`${url}`)
+    .then(response => response.data)
+    .catch(erro => console.log(erro));
 }
 const useGetMovies = (url, title) => {
   const { data: movies, isLoading, isError, } = useQuery(

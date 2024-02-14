@@ -1,5 +1,5 @@
 import React from "react";
-import routesMovie from "../../api/api";
+import { routesMovie } from "../../api/api.js";
 import CategorySlider from "../../components/category-slider/CategorySlider";
 import Footer from "../../components/footer/Footer";
 import Hero from "../../components/hero/Hero";

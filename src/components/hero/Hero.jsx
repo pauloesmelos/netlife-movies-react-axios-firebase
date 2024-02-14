@@ -1,9 +1,9 @@
 import React from "react";
-import api from "../../api/api.js";
+import { routesMovie } from "../../api/api.js";
 import useGetMovies from "../../hooks/api/getMovies/useGetMovies";
 
 const Hero = () => {
-  const url = api.popular;
+  const url = routesMovie.popular;
   const pathImg = import.meta.env.VITE_APP_API_PATH_IMAGE;
   const { movies, isError, isLoading } = useGetMovies(url);
   const [randomMovie, setRandomMovie] = React.useState({});

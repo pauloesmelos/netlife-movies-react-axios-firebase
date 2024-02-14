@@ -11,6 +11,14 @@
     /* chrome*/
     display: none;
 }
+.after-red::before{
+    content: "";
+    width: 3px;
+    height: 30px;
+    background-color: red;
+    display: inline-block;
+    margin: 0 5px -8px 0;
+}
 @layer base {
     html {
         @apply bg-black
