@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { MdHelpCenter } from "react-icons/md";
-import Tooltip from "../../components/auth/tooltip/Tooltip";
 import Error from "../../components/auth/error/Error";
+import Tooltip from "../../components/auth/tooltip/Tooltip";
 import useForm from "../../hooks/form/useForm";
 
 const SignUp = () => {
@@ -14,6 +14,7 @@ const SignUp = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShowPassword(false);
   }
   const handleHover = () => {
     setTooltip(e => !e);
@@ -30,7 +31,7 @@ const SignUp = () => {
         {/* container */}
         <div className="w-full h-full flex justify-center items-center">
             {/* card */}
-            <div className="bg-black/70 w-[80%] sm:w-[40%] lg:w-[35%] h-[70vh] z-30 px-8 py-1">
+            <div className="bg-black/70 w-[80%] sm:w-[40%] lg:w-[25%] h-[70vh] z-30 px-8 py-1">
                <div className="flex justify-between my-8 relative">
                 <h2 className="text-white font-bold text-2xl sm:text-3xl">
                     Sign Up
@@ -53,8 +54,8 @@ const SignUp = () => {
                         type="text"
                         name="name"
                         placeholder="Name"         
-                        className={`bg-slate-600 text-gray-300 p-3 rounded w-full border
-                        ${name.erro ? "border-red-600" : "border-transparent"}`}
+                        className={`bg-slate-600 text-gray-300 p-3 rounded w-full border-b-2 outline-none
+                        ${name.erro ? "border-orange-600" : "border-transparent"}`}
                         value={name.input}
                         onChange={name.handleInput}
                         onBlur={name.onBlur}
@@ -68,8 +69,8 @@ const SignUp = () => {
                         type="email" 
                         name="email"
                         placeholder="Email"         
-                        className={`bg-slate-600 text-gray-300 p-3 rounded w-full border
-                        ${email.erro ? "border-red-600" : "border-transparent"}`}
+                        className={`bg-slate-600 text-gray-300 p-3 rounded w-full border-b-2 outline-none
+                        ${email.erro ? "border-orange-600" : "border-transparent"}`}
                         value={email.input}
                         onChange={email.handleInput}
                         onBlur={email.onBlur}
@@ -83,8 +84,8 @@ const SignUp = () => {
                         type={showPassword ? `text` : `password`}
                         name="password"
                         placeholder="Password"
-                        className={`bg-slate-600 text-gray-300 p-3 rounded w-full border
-                        ${password.erro ? "border-red-600" : "border-transparent"}`}
+                        className={`bg-slate-600 text-gray-300 p-3 rounded w-full border-b-2 outline-none
+                        ${password.erro ? "border-orange-600" : "border-transparent"}`}
                         value={password.input}
                         onChange={password.handleInput}
                         onBlur={password.onBlur}
