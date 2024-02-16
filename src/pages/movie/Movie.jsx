@@ -14,7 +14,7 @@ const Movie = () => {
     const year = text?.split("-");
     return year[0]; // 2024 01 20
   }
-  console.log(data);
+
   if(!data) return null;
   return (
     <section className="w-full h-full">
