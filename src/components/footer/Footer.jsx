@@ -10,7 +10,7 @@ const Footer = () => {
   }
   return (
     <footer className="w-full bg-[#111] pt-16">
-      <div className="w-full px-10">
+      <div className="w-full max-w-[1200px] mx-auto px-10 xl:px-0">
         <div>
             <h2 className="text-red-600 font-bold text-4xl ">
                 NETLIFE

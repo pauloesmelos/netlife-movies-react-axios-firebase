@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import Details from "../../components/details/Details";
+import Footer from "../../components/footer/Footer";
 import Promotion from "../../components/promotion/Promotion";
 import useGetMovieId from "../../hooks/api/getMovieId/useGetMovieId";
 
@@ -12,6 +14,7 @@ const Movie = () => {
     const year = text?.split("-");
     return year[0]; // 2024 01 20
   }
+  console.log(data);
   if(!data) return null;
   return (
     <section className="w-full h-full">
@@ -32,7 +35,7 @@ const Movie = () => {
               {data?.title}
             </h2>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center text-gray-400 gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center text-gray-400 font-semibold gap-4">
             <p>
               {getYear(data?.release_date)}
               <span className="ml-3 hidden sm:inline-block">|</span>
@@ -55,14 +58,21 @@ const Movie = () => {
             ))}
           </div>
           <div className="w-full max-w-[80%] sm:max-w-[50%]">
-            <p className="text-white">
+            <p className="text-white text-[1rem] sm:text-lg">
               {data?.overview}
             </p>
           </div>
         </div>
         {/* promotion subscribed */}
-        <Promotion />
+        <div className="flex justify-center">
+          <Promotion />
+        </div>
+        {/* details */}
+        <div className="w-full bg-[#222]">
+          <Details movie={data} />
+        </div>
       </div>
+      <Footer />
     </section>
   )
 }
