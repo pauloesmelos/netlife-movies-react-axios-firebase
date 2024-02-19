@@ -1,5 +1,6 @@
 import React from "react";
 import { MdOutlineLocalMovies } from "react-icons/md";
+import { NavLink } from "react-router-dom";
 
 const Promotion = () => {
   return (
@@ -14,9 +15,13 @@ const Promotion = () => {
         </p>
       </div>
       <div>
-        <button className="px-6 py-2 text-white rounded bg-red-600 hover:opacity-80 duration-200 uppercase">
+        <NavLink 
+          className="px-2 sm:px-6 sm:py-2 py-1 text-white rounded bg-red-600 hover:opacity-80 
+          duration-200 uppercase sm:text-sm lg:text-lg"
+          to={"/signup"}
+        >
           Subscribed Netlife
-        </button>
+        </NavLink>
       </div>
     </div>
   )

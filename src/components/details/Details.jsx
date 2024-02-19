@@ -3,8 +3,6 @@ import { BsEmojiFrown , BsEmojiAngry, BsEmojiGrinFill    } from "react-icons/bs"
 import { FaSmile } from "react-icons/fa";
 
 const Details = ({ movie }) => {
-  const path_image = import.meta.env.VITE_APP_API_PATH_IMAGE;
-
   const getRunTime = (time) => {
     let hourFormated = "";
     const hour = Math.floor(time / 60);
@@ -46,7 +44,7 @@ const Details = ({ movie }) => {
       )
     } 
   }
-  console.log(movie);
+
   if(!movie) return null;
   return (
     <section className="w-full max-w-[1200px] mx-auto py-24">

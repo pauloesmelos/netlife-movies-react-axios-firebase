@@ -48,7 +48,7 @@ const Footer = () => {
         </div>
         <div className="py-10">
             <FaRegArrowAltCircleUp
-              className="text-5xl text-white animate-piscar cursor-pointer hover:text-red-600"
+              className="text-[2.7rem] text-white animate-piscar cursor-pointer hover:text-red-600"
               onClick={toTop}
             />
         </div>

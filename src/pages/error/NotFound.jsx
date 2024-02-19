@@ -8,7 +8,7 @@ const NotFound = () => {
   const path_img = import.meta.env.VITE_APP_API_PATH_IMAGE;
   const [firstMovie, setFirstMovie] = React.useState({});
   const { movies } = useGetMovies(api);
-  console.log(movies);
+
   React.useEffect(() => {
     setFirstMovie({
       ...movies?.results[3] /* random index ;) */
