@@ -3,6 +3,7 @@ import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { MdHelpCenter } from "react-icons/md";
 import Error from "../../components/auth/error/Error";
 import Tooltip from "../../components/auth/tooltip/Tooltip";
+import { GlobalUser } from '../../global/user/GlobalUser';
 import useForm from "../../hooks/form/useForm";
 
 const SignUp = () => {
@@ -11,10 +12,23 @@ const SignUp = () => {
   const name = useForm("name");
   const email = useForm("email");
   const password = useForm("password");
-  
-  const handleSubmit = (e) => {
+  const { createUser } = React.useContext(GlobalUser);
+
+  const haveError = () => {
+    name.verify();
+    email.verify();
+    password.verify();
+    if(!name.verify() || !email.verify() || !password.verify()) {
+      return true;
+    }
+    else return false;
+  }
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setShowPassword(false);
+    if(!haveError()) {
+      await createUser(email.input, password.input, name.input);
+    }
   }
   const handleHover = () => {
     setTooltip(e => !e);

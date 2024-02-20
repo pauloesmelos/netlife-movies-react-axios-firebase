@@ -4,14 +4,17 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import App from './App.jsx';
 import './css/tailwind.css';
 import { GlobalSearchNavProvider } from './global/search-navbar/GlobalSearchNav.jsx';
+import { GlobalUserProvider } from './global/user/GlobalUser.jsx';
 
 const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <GlobalSearchNavProvider>
-        <App />
-      </GlobalSearchNavProvider>
+      <GlobalUserProvider>
+        <GlobalSearchNavProvider>
+          <App />
+        </GlobalSearchNavProvider>
+      </GlobalUserProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 )

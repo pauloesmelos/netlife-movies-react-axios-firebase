@@ -47,7 +47,7 @@ const useForm = (type) => { // ideia: criar mais regexp p/ cada e mudar as msg d
   const onBlur = ({ target }) => {
     verify(target.value);
   }
-  return { input, onBlur, handleInput, erro }
+  return { input, onBlur, handleInput, erro, verify: () => verify(input) }
 }
 
 export default useForm;

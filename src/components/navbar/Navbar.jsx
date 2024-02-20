@@ -1,10 +1,10 @@
 import React from "react";
+import { FaSearch } from "react-icons/fa";
 import { IoMenu } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
-import { FaSearch } from "react-icons/fa"; 
+import { GlobalSearchNav } from "../../global/search-navbar/GlobalSearchNav";
 import Mobile from "../mobile/Mobile";
 import SearchNavbar from "../search/search-navbar/SearchNavbar";
-import { GlobalSearchNav } from "../../global/search-navbar/GlobalSearchNav";
 
 const Navbar = () => {
   const [mobile, setMobile] = React.useState(false);
@@ -12,6 +12,9 @@ const Navbar = () => {
 
   const handleMobile = () => {
     setMobile(state => !state);
+  }
+  const handleSearchNav = () => {
+    setSearchNav(state => !state);
   }
 
   return (
@@ -34,7 +37,7 @@ const Navbar = () => {
             <FaSearch 
               className="text-3xl text-white cursor-pointer hover:text-red-600 
               duration-200 mr-4"
-              onClick={() => setSearchNav(true)}
+              onClick={handleSearchNav}
             />
           </div>
           <NavLink to={"/signup"}>

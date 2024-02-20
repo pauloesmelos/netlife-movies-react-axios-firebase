@@ -1,7 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { routesMovie } from "../../api/api.js";
 import useGetMovies from "../../hooks/api/getMovies/useGetMovies";
-import { NavLink } from "react-router-dom";
 
 const Hero = () => {
   const url = routesMovie.popular;
@@ -32,7 +32,7 @@ const Hero = () => {
         {/* overlay */}
         <div className="w-full h-full absolute top-0 left-0 bg-gradient-to-r from-black/80 to-black/10" />
         {/* infos and buttons */}
-        <div className="flex gap-3 absolute top-0 left-0  flex-col justify-center w-full h-full px-7">
+        <div className="flex gap-3 absolute top-0 left-0  flex-col items-start justify-center w-full h-full px-7">
             <NavLink 
               to={`/movies/${randomMovie?.id}`} 
               className="text-white font-bold text-3xl sm:text-4xl cursor-pointer"
