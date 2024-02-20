@@ -9,15 +9,15 @@ const inputs = {
         erro: "This is invalid e-mail."
     },
     password: {
-        regexp: /^.{3,}$/,
-        erro: "Password should be more than 3 characters."
+        regexp: /^.{6,}$/,
+        erro: "Password should be more than 6 characters."
     },
 }
 /* type = name, email or password */
 const useForm = (type) => { // ideia: criar mais regexp p/ cada e mudar as msg de erro conforme preenchimento
   const [input, setInput] = React.useState("");
   const [erro, setErro] = React.useState("");
-  const [typeErro, setTypeErro] = React.useState("");
+
   const firstLetterCapitalize = (text) => {
     let firstLetter = text.substring(0,1).toString();
     return text.replace(firstLetter, firstLetter.toUpperCase());

@@ -34,7 +34,7 @@ const Card = ({ movie }) => {
             />
         </div>
         {/* overlay and title card */}
-        <div className="absolute w-full h-full top-0 left-0 opacity-0 hover:opacity-100 bg-black/70 
+        <div className="absolute w-full h-full top-0 left-0 opacity-0 hover:opacity-100 bg-black/50 
         duration-200 text-wrap">
           <span className="text-white font-bold text-sm sm:text-lg flex justify-center 
           items-center w-full h-full px-10 sm:px-2">

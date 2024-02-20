@@ -1,18 +1,21 @@
 import React from 'react';
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { MdHelpCenter } from "react-icons/md";
+import { IoIosCloseCircle } from "react-icons/io";
 import Error from "../../components/auth/error/Error";
 import Tooltip from "../../components/auth/tooltip/Tooltip";
 import { GlobalUser } from '../../global/user/GlobalUser';
 import useForm from "../../hooks/form/useForm";
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [tooltip, setTooltip] = React.useState(false);
   const [showPassword, setShowPassword] = React.useState(false);
   const name = useForm("name");
   const email = useForm("email");
   const password = useForm("password");
-  const { createUser } = React.useContext(GlobalUser);
+  const { createUser, error, setError } = React.useContext(GlobalUser);
 
   const haveError = () => {
     name.verify();
@@ -25,9 +28,14 @@ const SignUp = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setShowPassword(false);
-    if(!haveError()) {
-      await createUser(email.input, password.input, name.input);
+    try {
+      setShowPassword(false);
+      if(!haveError()) {
+        const sucess = await createUser(email.input, password.input, name.input);
+        sucess ? navigate("/account") : null;
+      }
+    } catch(erro) {
+      console.log(erro);
     }
   }
   const handleHover = () => {
@@ -37,6 +45,10 @@ const SignUp = () => {
     setShowPassword(state => !state);
   }
 
+  React.useEffect(() => {
+    setError(""); /* clear error before changed screen - login signup */
+  }, []);
+
   return (
     <section className="w-full h-screen bg-movies bg-cover bg-center bg-no-repeat relative z-10">
       <div className="w-full h-full">
@@ -45,7 +57,7 @@ const SignUp = () => {
         {/* container */}
         <div className="w-full h-full flex justify-center items-center">
             {/* card */}
-            <div className="bg-black/70 w-[80%] sm:w-[40%] lg:w-[25%] h-[70vh] z-30 px-8 py-1">
+            <div className="bg-black/70 w-[80%] sm:w-[45%] lg:w-[34%] h-[70vh] z-30 px-8 py-1">
                <div className="flex justify-between my-8 relative">
                 <h2 className="text-white font-bold text-2xl sm:text-3xl">
                     Sign Up
@@ -61,6 +73,15 @@ const SignUp = () => {
                   text={"Create your account"}
                 />
                </div>
+               {/* message error incorrect/in-use credentials */}
+               { error && 
+                <div className="flex gap-1 items-center mb-3">
+                  <IoIosCloseCircle className="text-red-500" />
+                  <p className="text-red-500 font-bold text-sm">
+                    {error}
+                  </p>
+                </div>
+               }
                <form className="" onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-3">
                     <div className="w-full">

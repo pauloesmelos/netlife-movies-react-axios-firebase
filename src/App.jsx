@@ -6,6 +6,8 @@ import SignUp from "./pages/auth/SignUp";
 import NotFound from "./pages/error/NotFound";
 import Home from "./pages/home/Home";
 import Movie from "./pages/movie/Movie";
+import Account from "./pages/account/Account";
+import ProtectedRoute from "./components/protected-route/ProtectedRoute";
 
 const App = () => {
 
@@ -25,6 +27,14 @@ const App = () => {
           <Route
             path="/login"
             element={<Login />} 
+          />
+          <Route
+            path="/account"
+            element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            } 
           />
           <Route
             path="/movies/:id"
