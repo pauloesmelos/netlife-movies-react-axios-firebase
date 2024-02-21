@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import App from './App.jsx';
 import './css/tailwind.css';
+import { GlobalSavedMoviesProvider } from './global/saved-movies/GlobalSavedMovies.jsx';
 import { GlobalSearchNavProvider } from './global/search-navbar/GlobalSearchNav.jsx';
 import { GlobalUserProvider } from './global/user/GlobalUser.jsx';
 
@@ -12,7 +13,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <QueryClientProvider client={queryClient}>
       <GlobalUserProvider>
         <GlobalSearchNavProvider>
-          <App />
+          <GlobalSavedMoviesProvider>
+            <App />
+          </GlobalSavedMoviesProvider>
         </GlobalSearchNavProvider>
       </GlobalUserProvider>
     </QueryClientProvider>

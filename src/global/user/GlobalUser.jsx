@@ -1,8 +1,8 @@
-import 
-{ createUserWithEmailAndPassword, 
-  onAuthStateChanged, 
-  signOut, 
-  signInWithEmailAndPassword 
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 import React from "react";
@@ -25,7 +25,8 @@ export const GlobalUserProvider = ({ children }) => {
         await createUserWithEmailAndPassword(auth, email, password);
         /* salvar no db quando criar um novo user */
         setDoc(doc(db, "users", email), {
-            savedMovies: []
+            savedMovies: [],
+            username: username
         });
         return true;
     } catch(erro) {
