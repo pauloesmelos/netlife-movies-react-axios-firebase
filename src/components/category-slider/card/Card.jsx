@@ -1,14 +1,17 @@
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import React from "react";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { db } from "../../../firebase/firebase";
 import { GlobalUser } from "../../../global/user/GlobalUser";
+import { GlobalSavedMovies } from "../../../global/saved-movies/GlobalSavedMovies";
 
 const Card = ({ movie }) => {
   const pathIcon = import.meta.env.VITE_APP_API_PATH_ICON;
   const navigate = useNavigate();
   const { user, isLogged } = React.useContext(GlobalUser);
+  const { savedMovies } = React.useContext(GlobalSavedMovies);
+  const [like, setLike] = React.useState(false);
 
   const limitText = (text, limit) => {
     const newText = text?.split(" ").slice(0, limit).join(" ");
@@ -30,14 +33,19 @@ const Card = ({ movie }) => {
             img: movie?.backdrop_path,
           }),
         });
-      }
-      else {
+        setLike(true);
+      } else {
         alert("Do login, please.");
       }
     } catch (erro) {
       console.log(erro);
     }
   };
+  React.useEffect(() => {
+    const isLike = savedMovies?.some(mov => mov.title === movie?.title);
+    setLike(isLike);
+  }, [savedMovies]); // put setLike to ??
+
   if (!movie?.backdrop_path) return null;
 
   return (
@@ -68,13 +76,23 @@ const Card = ({ movie }) => {
             {limitText(movie?.title, 4)}
           </span>
           {/* like */}
-          <div className="absolute top-1 sm:top-2 left-2">
-            <FaRegHeart
-              onClick={handleSavedMovies}
-              id="like"
-              className="text-red-400 hover:text-red-600 text-xl sm:text-2xl"
-            />
-          </div>
+          {like ? (
+            <div className="absolute top-1 sm:top-2 left-2">
+              <FaHeart
+                onClick={handleSavedMovies}
+                id="like"
+                className="text-red-600 text-xl sm:text-2xl"
+              />
+            </div>
+          ) : (
+            <div className="absolute top-1 sm:top-2 left-2">
+              <FaRegHeart
+                onClick={handleSavedMovies}
+                id="like"
+                className="text-red-400 hover:text-red-600 text-xl sm:text-2xl"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

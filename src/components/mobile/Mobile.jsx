@@ -76,7 +76,10 @@ const Mobile = ({ mobile, handleMobile }) => {
             </li>
             {isLogged() ? (
               <>
-                <ProfileBar email={user?.email} />
+                <ProfileBar 
+                  email={user?.email} 
+                  handleMobile={handleMobile} 
+                />
                 <button
                   onClick={handleModalLogout}
                   className="text-white bg-red-600 px-6 py-3 font-semibold text-sm duration-300

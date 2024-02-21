@@ -35,13 +35,13 @@ const CategorySlider = ({ title, url }) => {
           </div>
           <div className="w-full hidden group-hover:block z-30">
             <IoIosArrowBack
-              className="text-black bg-white/40 hover:bg-white rounded-full absolute top-[50%] left-1 sm:left-2 
-              text-2xl sm:text-4xl cursor-pointer sm:p-2"
+              className="text-black bg-gray-400 hover:bg-white rounded-full absolute top-[50%] left-1 sm:left-2 
+              text-3xl sm:text-4xl cursor-pointer p-1 duration-200"
               onClick={previuos}
             />
             <IoIosArrowForward 
-              className="text-black bg-white/40 hover:bg-white rounded-full absolute top-[50%] right-0 sm:right-5 
-              text-2xl sm:text-4xl cursor-pointer sm:p-2"
+              className="text-black bg-gray-400 hover:bg-white rounded-full absolute top-[50%] right-0 sm:right-5 
+              text-3xl sm:text-4xl cursor-pointer p-1 duration-200"
               onClick={next}
             />
           </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
-const ProfileBar = ({ email }) => {
+const ProfileBar = ({ email, handleMobile }) => {
 
   const getNameOfEmail = (email) => {
     const name = email?.split("@").slice(0,1);
@@ -11,6 +11,7 @@ const ProfileBar = ({ email }) => {
   return (
     <div className="w-full">
       <NavLink
+      onClick={handleMobile}
       to={"/account"}
       className="w-full p-2 flex gap-2 items-center hover:opacity-70 duration-300">
         <FaRegUser className="text-white font-bold text-xl"/>
