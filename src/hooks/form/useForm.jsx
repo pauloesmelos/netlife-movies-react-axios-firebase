@@ -2,7 +2,7 @@ import React from "react";
 const inputs = {
     name: {
         regexp: /^(?=.*[a-zA-Z_])[\w\s]*$/,
-        erro: "Dont fill only numbers.",
+        erro: "This is invalid username..",
     },
     email: {
         regexp: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,

@@ -7,25 +7,33 @@ const Card = ({ movie }) => {
   const pathIcon = import.meta.env.VITE_APP_API_PATH_ICON;
   const navigate = useNavigate();
   const [like, setLike] = React.useState(false);
-  const { savedMovies, handleSavedMovies } = React.useContext(GlobalSavedMovies);
+  const { 
+    savedMovies, 
+    handleSavedMovies, 
+    handleRemoveMovie 
+  } = React.useContext(GlobalSavedMovies);
 
   const limitText = (text, limit) => {
     const newText = text?.split(" ").slice(0, limit).join(" ");
     return text?.split(" ").length > 4 ? newText.concat("...") : newText;
   }
   const handleNavigate = ({ target }) => {
-    console.log(target);
-    if (target.id !== "like") {
+    /* aria-label ou id in the solution */
+    const id = "like";
+    const element = target.id;
+    const parent = target.closest(`#${id}`) ? target.closest(`#${id}`).id : null ;
+
+    if (element !== id && parent !== id) {
       navigate(`/movies/${movie?.id}`);
-      console.log("sim");
-    }
-    else {
-      console.log("não");
     }
   }
   const saveMovie = () => {
     handleSavedMovies(movie);
     setLike(true);
+  }
+  const removeMovie = () => {
+    handleRemoveMovie(movie?.id);
+    setLike(false);
   }
   
   React.useEffect(() => {
@@ -37,6 +45,7 @@ const Card = ({ movie }) => {
 
   return (
     <div
+      id="container"
       className="w-full inline-block max-w-[230px] sm:max-w-[280px] lg:max-w-[350px] mr-3 
         relative cursor-pointer border border-gray-900"
       onClick={handleNavigate}
@@ -66,10 +75,11 @@ const Card = ({ movie }) => {
           {like ? (
             <div 
               id="like" 
-              onClick={saveMovie} 
+              onClick={removeMovie} 
               className="absolute top-1 sm:top-2 left-2"
             >
               <FaHeart
+                id="like" 
                 className="text-red-600 text-xl sm:text-2xl"
               />
             </div>
@@ -80,6 +90,7 @@ const Card = ({ movie }) => {
               className="absolute top-1 sm:top-2 left-2"
             >
               <FaRegHeart
+                id="like" 
                 className="text-red-400 hover:text-red-600 text-xl sm:text-2xl"
               />
             </div>

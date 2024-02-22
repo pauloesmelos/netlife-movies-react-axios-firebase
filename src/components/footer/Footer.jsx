@@ -1,5 +1,6 @@
 import React from "react";
-import { FaRegArrowAltCircleUp } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
+import SubFooter from "./sub-footer/SubFooter";
 
 const Footer = () => {
   const toTop = () => {
@@ -47,12 +48,14 @@ const Footer = () => {
             </ul>
         </div>
         <div className="py-10">
-            <FaRegArrowAltCircleUp
-              className="text-[2.7rem] text-white animate-piscar cursor-pointer hover:text-red-600"
+            <FaArrowUp
+              className="text-[2rem] sm:text-[2.5rem] text-white animate-piscar cursor-pointer hover:text-black
+              p-2 bg-red-600 rounded-full"
               onClick={toTop}
             />
         </div>
       </div>
+      <SubFooter />
     </footer>
   )
 }

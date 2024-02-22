@@ -1,10 +1,11 @@
 import React from 'react';
 import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { MdHelpCenter } from "react-icons/md";
-import Error from "../../components/auth/error/Error";
 import { IoIosCloseCircle } from "react-icons/io";
+import Error from "../../components/auth/error/Error";
 import Tooltip from "../../components/auth/tooltip/Tooltip";
 import useForm from "../../hooks/form/useForm";
+import BeatLoader from "react-spinners/BeatLoader";
 import { GlobalUser } from '../../global/user/GlobalUser';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +15,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const email = useForm("email");
   const password = useForm("password");
-  const { login, error, setError } = React.useContext(GlobalUser);
+  const { login, error, setError, loading } = React.useContext(GlobalUser);
   
   const haveError = () => {
     email.verify();
@@ -38,6 +39,12 @@ const Login = () => {
   }
   const handlePassword = () => {
     setShowPassword(state => !state);
+  }
+
+  const css = { /* css spinner loader */
+    borderColor: "blue",
+    color: "red",
+    display: "block"
   }
 
   React.useEffect(() => {
@@ -124,7 +131,18 @@ const Login = () => {
                     </div>
                     <button className="text-white bg-gradient-to-r from-[#E50914] to-[#b93333] p-3 font-semibold rounded
                     hover:opacity-80">
-                        Login
+                        { loading ?
+                          <BeatLoader
+                            color="#fff"
+                            cssOverride={css}
+                            loading={loading}
+                            size={10}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                          />
+                          :
+                          "Login"
+                        }
                     </button>
                 </div>
                </form>

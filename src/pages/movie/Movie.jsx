@@ -5,11 +5,14 @@ import Footer from "../../components/footer/Footer";
 import Promotion from "../../components/promotion/Promotion";
 import useGetMovieId from "../../hooks/api/getMovieId/useGetMovieId";
 import ButtonLikeMovie from "../../components/like-movie/button/ButtonLikeMovie";
+import { GlobalSavedMovies } from "../../global/saved-movies/GlobalSavedMovies";
 
 const Movie = () => {
   const path_image = import.meta.env.VITE_APP_API_PATH_IMAGE;
+  const [like, setLike] = React.useState(false);
   const { id } = useParams();
   const { data } = useGetMovieId(id);
+  const { handleSavedMovies, handleRemoveMovie } = React.useContext(GlobalSavedMovies);
 
   const getYear = (text) => {
     const year = text?.split("-");
@@ -18,6 +21,14 @@ const Movie = () => {
   const limitOverview = (text, limit) => {
     const arrayTexts = text?.split(" ").slice(0, limit);
     return arrayTexts.join(" ").concat("...");
+  }
+  const saveMovie = () => {
+    handleSavedMovies(data);
+    setLike(true);
+  }
+  const removeMovie = () => {
+    handleRemoveMovie(data?.id);
+    setLike(false);
   }
 
   if(!data) return null;
@@ -70,7 +81,13 @@ const Movie = () => {
             </p>
           </div>
           <div>
-            <ButtonLikeMovie />
+            <ButtonLikeMovie 
+              handleSave={saveMovie}
+              handleRemove={removeMovie}
+              like={like}
+              setLike={setLike}
+              title={data?.title}
+            />
           </div>
         </div>
         {/* promotion subscribed */}

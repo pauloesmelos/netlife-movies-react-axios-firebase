@@ -12,6 +12,7 @@ export const GlobalUser = React.createContext();
 export const GlobalUserProvider = ({ children }) => {
   const [user, setUser] = React.useState({});
   const [error, setError] = React.useState("");
+  const [loading, setLoading] = React.useState(false); /* login */
 
   const getTypeError = (message) => {
     if(message === "auth/email-already-in-use") {
@@ -20,6 +21,7 @@ export const GlobalUserProvider = ({ children }) => {
   }
   const createUser = async (email, password, username) => {
     setError("");
+    setLoading(true);
     try {
         /* salvar em autenticações o novo user*/
         await createUserWithEmailAndPassword(auth, email, password);
@@ -32,6 +34,8 @@ export const GlobalUserProvider = ({ children }) => {
     } catch(erro) {
         getTypeError(erro.code);
         return false;
+    } finally {
+      setLoading(false);
     }
   }
   const isLogged = () => {
@@ -40,15 +44,19 @@ export const GlobalUserProvider = ({ children }) => {
   }
   const login = async (email, password) => {
     setError("");
+    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       return true;
     } catch(erro) {
       setError("Incorrect email or password.");
       return false;
+    } finally {
+      setLoading(false);
     }
   }
   const logout = async () => {
+    setLoading(true);
     try { 
       await signOut(auth);
       window.location.reload();
@@ -56,6 +64,8 @@ export const GlobalUserProvider = ({ children }) => {
     } catch(erro) {
       console.log(erro);
       return false;
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -69,7 +79,7 @@ export const GlobalUserProvider = ({ children }) => {
   }, []);
 
   return (
-    <GlobalUser.Provider value={{user, setUser, createUser, isLogged, logout, login, error, setError }}>
+    <GlobalUser.Provider value={{user, setUser, createUser, isLogged, logout, login, error, setError, loading }}>
       { children }
     </GlobalUser.Provider>
   )
