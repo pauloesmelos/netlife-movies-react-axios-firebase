@@ -1,46 +1,33 @@
-import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import React from "react";
-import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../../firebase/firebase";
-import { GlobalUser } from "../../../global/user/GlobalUser";
 import { GlobalSavedMovies } from "../../../global/saved-movies/GlobalSavedMovies";
 
 const Card = ({ movie }) => {
   const pathIcon = import.meta.env.VITE_APP_API_PATH_ICON;
   const navigate = useNavigate();
-  const { user, isLogged } = React.useContext(GlobalUser);
-  const { savedMovies } = React.useContext(GlobalSavedMovies);
   const [like, setLike] = React.useState(false);
+  const { savedMovies, handleSavedMovies } = React.useContext(GlobalSavedMovies);
 
   const limitText = (text, limit) => {
     const newText = text?.split(" ").slice(0, limit).join(" ");
     return text?.split(" ").length > 4 ? newText.concat("...") : newText;
-  };
+  }
   const handleNavigate = ({ target }) => {
+    console.log(target);
     if (target.id !== "like") {
       navigate(`/movies/${movie?.id}`);
+      console.log("sim");
     }
-  };
-  const handleSavedMovies = async () => {
-    try {
-      if (isLogged()) {
-        const reference = doc(db, "users", `${user?.email}`);
-        await updateDoc(reference, {
-          savedMovies: arrayUnion({
-            id: movie?.id,
-            title: movie?.title,
-            img: movie?.backdrop_path,
-          }),
-        });
-        setLike(true);
-      } else {
-        alert("Do login, please.");
-      }
-    } catch (erro) {
-      console.log(erro);
+    else {
+      console.log("não");
     }
-  };
+  }
+  const saveMovie = () => {
+    handleSavedMovies(movie);
+    setLike(true);
+  }
+  
   React.useEffect(() => {
     const isLike = savedMovies?.some(mov => mov.title === movie?.title);
     setLike(isLike);
@@ -77,18 +64,22 @@ const Card = ({ movie }) => {
           </span>
           {/* like */}
           {like ? (
-            <div className="absolute top-1 sm:top-2 left-2">
+            <div 
+              id="like" 
+              onClick={saveMovie} 
+              className="absolute top-1 sm:top-2 left-2"
+            >
               <FaHeart
-                onClick={handleSavedMovies}
-                id="like"
                 className="text-red-600 text-xl sm:text-2xl"
               />
             </div>
           ) : (
-            <div className="absolute top-1 sm:top-2 left-2">
+            <div 
+              id="like" 
+              onClick={saveMovie} 
+              className="absolute top-1 sm:top-2 left-2"
+            >
               <FaRegHeart
-                onClick={handleSavedMovies}
-                id="like"
                 className="text-red-400 hover:text-red-600 text-xl sm:text-2xl"
               />
             </div>

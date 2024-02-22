@@ -1,17 +1,11 @@
 import React from "react";
-import { FaHeart } from "react-icons/fa";
-import { doc, updateDoc } from "firebase/firestore";
-import { GlobalUser } from "../../../global/user/GlobalUser";
-import { db } from "../../../firebase/firebase";
+import { IoClose } from "react-icons/io5";
+import { GlobalSavedMovies } from "../../../global/saved-movies/GlobalSavedMovies";
 
 const Item = ({ movie }) => {
   const path_icon = import.meta.env.VITE_APP_API_PATH_ICON;
-  const { user } = React.useContext(GlobalUser);
+  const { handleRemoveMovie } = React.useContext(GlobalSavedMovies);
 
-  const removeMovie = async () => {
-    const reference = doc(db, "users", `${user?.email}`);
-    //
-  }
   return (
     <div className="relative pr-2 inline-block w-[220px] sm:w-[300px] lg:w-[320px] xl:w-[380px]
     cursor-pointer">
@@ -30,10 +24,10 @@ const Item = ({ movie }) => {
             <p className="text-white font-bold text-sm text-wrap">{movie?.title}</p>
         </div>
         <div>
-          <FaHeart
-            onClick={removeMovie}
-            className="text-red-500 hover:text-red-300 absolute top-3 left-3 
-              text-xl sm:text-2xl" 
+          <IoClose
+            onClick={() => handleRemoveMovie(movie?.id)}
+            className="text-white hover:text-red-600 absolute top-1 left-3 
+              text-2xl sm:text-3xl" 
           />
         </div>
       </div>
