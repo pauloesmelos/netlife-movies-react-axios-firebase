@@ -1,7 +1,10 @@
 import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { GlobalSavedMovies } from "../../../global/saved-movies/GlobalSavedMovies";
+import { GlobalUser } from "../../../global/user/GlobalUser";
 
 const Card = ({ movie }) => {
   const pathIcon = import.meta.env.VITE_APP_API_PATH_ICON;
@@ -12,6 +15,7 @@ const Card = ({ movie }) => {
     handleSavedMovies, 
     handleRemoveMovie 
   } = React.useContext(GlobalSavedMovies);
+  const { isLogged } = React.useContext(GlobalUser);
 
   const limitText = (text, limit) => {
     const newText = text?.split(" ").slice(0, limit).join(" ");
@@ -28,12 +32,29 @@ const Card = ({ movie }) => {
     }
   }
   const saveMovie = () => {
-    handleSavedMovies(movie);
-    setLike(true);
+    if(isLogged()) {
+      handleSavedMovies(movie);
+      setLike(true);
+    }
+    else {
+      notify();
+    }
   }
   const removeMovie = () => {
     handleRemoveMovie(movie?.id);
     setLike(false);
+  }
+  const notify = () => {
+    toast.error("Please, do login.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      theme: "dark",
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      transition: Bounce
+    })
   }
   
   React.useEffect(() => {
@@ -97,6 +118,7 @@ const Card = ({ movie }) => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

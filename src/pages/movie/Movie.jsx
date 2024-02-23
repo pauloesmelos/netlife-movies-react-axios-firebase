@@ -2,10 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Details from "../../components/details/Details";
 import Footer from "../../components/footer/Footer";
-import Promotion from "../../components/promotion/Promotion";
-import useGetMovieId from "../../hooks/api/getMovieId/useGetMovieId";
 import ButtonLikeMovie from "../../components/like-movie/button/ButtonLikeMovie";
+import Promotion from "../../components/promotion/Promotion";
 import { GlobalSavedMovies } from "../../global/saved-movies/GlobalSavedMovies";
+import { GlobalUser } from "../../global/user/GlobalUser";
+import useGetMovieId from "../../hooks/api/getMovieId/useGetMovieId";
 
 const Movie = () => {
   const path_image = import.meta.env.VITE_APP_API_PATH_IMAGE;
@@ -13,6 +14,7 @@ const Movie = () => {
   const { id } = useParams();
   const { data } = useGetMovieId(id);
   const { handleSavedMovies, handleRemoveMovie } = React.useContext(GlobalSavedMovies);
+  const { isLogged } = React.useContext(GlobalUser);
 
   const getYear = (text) => {
     const year = text?.split("-");
@@ -23,8 +25,10 @@ const Movie = () => {
     return arrayTexts.join(" ").concat("...");
   }
   const saveMovie = () => {
-    handleSavedMovies(data);
-    setLike(true);
+    if(isLogged()) {
+      handleSavedMovies(data);
+      setLike(true);
+    }
   }
   const removeMovie = () => {
     handleRemoveMovie(data?.id);

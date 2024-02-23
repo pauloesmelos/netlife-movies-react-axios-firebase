@@ -6,6 +6,7 @@ import Hero from "../../components/hero/Hero";
 
 const Home = () => {
   const categorys = Object.entries(routesMovie);
+
   return (
     <main>
       <Hero />

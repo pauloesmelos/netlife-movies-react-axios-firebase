@@ -5,6 +5,7 @@ import Card from './card/Card';
 
 const CategorySlider = ({ title, url }) => {
   const { movies } = useGetMovies(url, title); /* é preciso identificar cada query com algum id para não retornar sempre o msm result */
+  
   const slider = React.useRef();
 
   const next = () => {

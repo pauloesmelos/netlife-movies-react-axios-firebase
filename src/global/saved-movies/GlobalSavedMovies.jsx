@@ -20,10 +20,7 @@ export const GlobalSavedMoviesProvider = ({ children }) => {
             img: movie?.backdrop_path,
           }),
         });
-        //setLike(true);
-      } else {
-        alert("Do login, please.");
-      }
+      } 
     } catch (erro) {
       console.log(erro);
     }
@@ -31,7 +28,7 @@ export const GlobalSavedMoviesProvider = ({ children }) => {
   const handleRemoveMovie = async (id) => {
     try {
       const reference = doc(db, "users", `${user?.email}`);
-      const filterMovies = savedMovies.filter((movie) => movie.id !== id);
+      const filterMovies = savedMovies?.filter((movie) => movie.id !== id);
       await updateDoc(reference, {
         savedMovies: filterMovies
       });
