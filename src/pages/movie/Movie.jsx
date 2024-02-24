@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Details from "../../components/details/Details";
 import Footer from "../../components/footer/Footer";
@@ -110,6 +110,7 @@ const Movie = () => {
               title={data?.title}
             />
           </div>
+          <ToastContainer />
         </div>
         {/* promotion subscribed */}
         <div className="flex justify-center">
