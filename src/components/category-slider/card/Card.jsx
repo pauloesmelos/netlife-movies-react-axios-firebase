@@ -45,11 +45,11 @@ const Card = ({ movie }) => {
     setLike(false);
   }
   const notify = () => {
-    toast.error("Please, do login.", {
+    toast.error("Please, do login in Netlife.", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
-      theme: "dark",
+      theme: "light",
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,

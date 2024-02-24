@@ -1,5 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Details from "../../components/details/Details";
 import Footer from "../../components/footer/Footer";
 import ButtonLikeMovie from "../../components/like-movie/button/ButtonLikeMovie";
@@ -16,6 +18,18 @@ const Movie = () => {
   const { handleSavedMovies, handleRemoveMovie } = React.useContext(GlobalSavedMovies);
   const { isLogged } = React.useContext(GlobalUser);
 
+  const notify = () => {
+    toast.error("Please, do login in Netlife.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      theme: "light",
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      transition: Bounce
+    })
+  }
   const getYear = (text) => {
     const year = text?.split("-");
     return year[0]; // 2024 01 20
@@ -28,6 +42,9 @@ const Movie = () => {
     if(isLogged()) {
       handleSavedMovies(data);
       setLike(true);
+    }
+    else {
+      notify();
     }
   }
   const removeMovie = () => {

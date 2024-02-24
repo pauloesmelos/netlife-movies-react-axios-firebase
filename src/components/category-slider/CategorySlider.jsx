@@ -34,7 +34,7 @@ const CategorySlider = ({ title, url }) => {
                   />
               ))}
           </div>
-          <div className="w-full hidden group-hover:block z-30">
+          <div className="w-full z-30">
             <IoIosArrowBack
               className="text-black bg-gray-400 hover:bg-white rounded-full absolute top-[50%] left-1 sm:left-2 
               text-3xl sm:text-4xl cursor-pointer p-1 duration-200"
